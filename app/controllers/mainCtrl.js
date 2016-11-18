@@ -2,7 +2,7 @@
  * Created by Dominika on 2016-11-07.
  */
 angular.module('myApp')
-    .controller('mainCtrl', ['$scope', '$rootScope', 'Product', 'Category', 'BasketService', function ($scope, $rootScope, Product, Category, BasketService) {
+    .controller('mainCtrl', ['$scope', '$rootScope', '$location', 'Product', 'Category', 'BasketService', function ($scope, $rootScope, $location, Product, Category, BasketService) {
         $scope.title = "Sklep spożywczy";
         Category.get({}, function (response) {
             $scope.categories = [];
@@ -20,6 +20,10 @@ angular.module('myApp')
             $scope.products = response;
         });
 
+        $scope.isShopping = function () {
+            return BasketService.ifIsShopping($scope.basketBtn);
+        };
+
         $scope.changeCheckbox = function (index) {
             $scope.categories[index].checked = !$scope.categories[index].checked
         };
@@ -27,4 +31,15 @@ angular.module('myApp')
         $scope.changeBasketBtn = function () {
             $scope.basketBtn = BasketService.changeBtnType($scope.basketBtn);
         };
+
+        $scope.addToBasket = function (index) {
+            BasketService.addToBasket(index);
+        }
+
+        $scope.basketAction = function () {
+            $scope.changeBasketBtn();
+            if(BasketService.ifIsShopping($scope.basketBtn)){
+                $location.path('/basket');
+            }
+        }
     }]);
