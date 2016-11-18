@@ -1,0 +1,40 @@
+[
+  {
+    "name" : "herbata zielona",
+    "price" : 2.99,
+    "category" : 2,
+    "img" : "http://www.sklep.mokate.com.pl/zdjecie,max,18.png"
+  },
+  {
+    "name" : "herbata czarna",
+    "price" : 4.99,
+    "category" : 2,
+    "img" : "http://www.sklep.mokate.com.pl/zdjecie,max,58.png"
+  },
+  {
+    "name" : "kawa czarna MK Cafe",
+    "description" : "arabica 100%, kraj pochodzenia: Indie, 250g",
+    "price" : 12.99,
+    "category" : 2,
+    "img" : "http://www.kmdelikatesy.pl/files/imagecache/product_full/zdjecia_produktow/09011165.jpg"
+  },
+  {
+  "name" : "sukienka",
+  "price" : 200.99,
+  "category" : 0,
+  "img": "https://s-media-cache-ak0.pinimg.com/564x/cb/03/6f/cb036fb6d490982e77b2c56f51f48473.jpg"
+},
+  {
+    "name" : "kawa czarna Mokate",
+    "description" : "arabica 100%, kraj pochodzenia: Brazylia, 250g",
+    "price" : 14.99,
+    "category" : 2,
+    "img" : "http://www.auchandirect.pl/images/h15/h96/8985392611358.jpg"
+  },
+  {
+    "name" : "blender ręczny",
+    "price" : 200.99,
+    "category" : 3,
+    "img" : "https://static.independent.co.uk/s3fs-public/styles/story_medium/public/thumbnails/image/2016/02/09/16/Breville%20Pick%20&%20Mix%20Hand%20Blender.jpg"
+  }
+]

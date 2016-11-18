@@ -1,5 +1,32 @@
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
+    <div class="h1 text-info row">
+        {{title}}
+    </div>
+
     <div class="row">
-        {{basic}}
+        <div class="panel panel-body col-md-2">
+            <h3 class="h3 text-info">Kategorie:</h3>
+            <p ng-repeat="c in categories">
+                <input type="checkbox" > {{c }}
+            </p>
+        </div>
+        <div class="col-md-10 jumbotron">
+            <div class="row">
+                <div class="btn btn-group pull-right">
+                    <button class="btn-sm btn-info"><span class="glyphicon glyphicon-apple"></span> Dodaj produkt </button>
+                    <button class="btn-sm btn-warning"><span class="glyphicon glyphicon-apple"></span> Zakupy </button>
+                </div>
+
+            </div>
+            <div class="row">
+                <h3 class="h3 text-info">Produkty:</h3>
+                <div class="col-sm-4" ng-repeat="p in products">
+                    {{p.name }}, <strong>{{p.price | currency}}</strong>, {{categories[p.category]}}
+                    <button class="btn-xs  btn-success"><span class="glyphicon glyphicon-euro"></span> Dodaj</button>
+                    <img ng-src="{{p.img}}" class="img-responsive" alt="{{p.name}}">
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
