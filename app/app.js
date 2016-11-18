@@ -8,6 +8,10 @@ config([ '$routeProvider', function( $routeProvider) {
         templateUrl: 'views/main.html',
         controller: 'mainCtrl'
       })
+      .when('/add_product', {
+          templateUrl: 'views/add_product.html',
+          controller: 'mainCtrl'
+      })
       .when('/basket', {
           templateUrl: 'views/basket.html',
           controller: 'basketCtrl'

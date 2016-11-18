@@ -4,6 +4,7 @@
 angular.module('myApp')
     .controller('mainCtrl', ['$scope', '$rootScope', '$location', 'Product', 'Category', 'BasketService', function ($scope, $rootScope, $location, Product, Category, BasketService) {
         $scope.title = "Sklep spożywczy";
+        $scope.basketSize = BasketService.basketSize();
         Category.get({}, function (response) {
             $scope.categories = [];
             for (var i = 0; i < response.categories.length; i++) {
@@ -34,6 +35,7 @@ angular.module('myApp')
 
         $scope.addToBasket = function (index) {
             BasketService.addToBasket(index);
+            $scope.basketSize = BasketService.basketSize();
         }
 
         $scope.basketAction = function () {
@@ -41,5 +43,13 @@ angular.module('myApp')
             if(BasketService.ifIsShopping($scope.basketBtn)){
                 $location.path('/basket');
             }
+        }
+
+        $scope.addProductAction = function () {
+            $location.path('/add_product');
+        }
+
+        $scope.returnToShop = function () {
+            $location.path('/');
         }
     }]);

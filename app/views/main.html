@@ -12,8 +12,9 @@
         </div>
         <div class="col-md-10 jumbotron">
             <div class="row">
+                <strong class="text-info" ng-hide="isShopping()">Koszyk: {{basketSize}}</strong>
                 <div class="btn btn-group pull-right">
-                    <button class="btn-sm btn-info"><span class="glyphicon glyphicon-apple"></span> Dodaj produkt </button>
+                    <button class="btn-sm btn-info" ng-click="addProductAction()"><span class="glyphicon glyphicon-apple"></span> Dodaj produkt </button>
                     <button ng-class="basketBtn.btn_class" ng-click="basketAction()"><span class="glyphicon glyphicon-apple"></span> {{basketBtn.title}} </button>
                 </div>
 

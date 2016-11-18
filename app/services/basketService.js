@@ -34,6 +34,10 @@ angular.module('myApp')
                 $cookies.put('basket', BasketArr);
                 console.log("New val: " + $cookies.get('basket'));
             },
+            basketSize: function () {
+                var basket = $cookies.get('basket');
+                return basket === undefined || basket == null ? 0 :$cookies.get('basket').split(',').length;
+            },
             getBasket : function () {
                 var products = [];
                 var inBasket = $cookies.get('basket').split(',');

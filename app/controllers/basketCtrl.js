@@ -9,4 +9,13 @@ angular.module('myApp')
         $scope.returnToShop = function () {
             $location.path('/');
         }
+
+        $scope.sumBasket = function () {
+            var total = 0;
+            for (var i = 0; i < $scope.products.length; i++) {
+                total += $scope.products[i].price;
+            }
+            console.log("total" + total + " pr.size" + $scope.products.length);
+            return total;
+        };
     }]);
