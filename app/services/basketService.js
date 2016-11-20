@@ -32,21 +32,26 @@ angular.module('myApp')
                 $cookies.remove('basket');
 
                 $cookies.put('basket', BasketArr);
-                console.log("New val: " + $cookies.get('basket'));
             },
             basketSize: function () {
                 var basket = $cookies.get('basket');
                 return basket === undefined || basket == null ? 0 :$cookies.get('basket').split(',').length;
             },
             getBasket : function () {
+                var allProducts = [];
                 var products = [];
                 var inBasket = $cookies.get('basket').split(',');
                 Product.get({}, function (response) {
-                    for(var index in inBasket){
-                        products.push(response[index]);
+                    var c = $cookies.get('products');
+                    allProducts =( c == null || c === undefined) ? response : response.concat(JSON.parse($cookies.get("products")));
+                    for(var index=0; index < inBasket.length; index++){
+                        products.push(allProducts[inBasket[index]]);
                     }
                 });
                 return products;
+            },
+            clearBasket: function () {
+                $cookies.remove('basket');
             }
         };
 

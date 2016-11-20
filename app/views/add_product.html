@@ -6,26 +6,26 @@
         <h1 class="text-info">
             Dodaj nowy produkt
         </h1>
-        <form class=" col-lg-push-3 col-md-6">
+        <form ng-submit="addProduct()" class=" col-lg-push-3 col-md-6">
             <div class="form-group">
                 <label for="name" class="control-label">Nazwa produktu: </label>
-                <input type="text" class="form-control" id="name" name="product_name" placeholder="przykładowa nazwa">
+                <input type="text" class="form-control" id="name" name="product_name" placeholder="przykładowa nazwa" ng-model="newProduct.name">
             </div>
             <div class="form-group">
                 <label for="price" class="control-label">Cena produktu: </label>
                 <input type="number" class="form-control" id="price" name="product_price"
-                       placeholder="przykładowa cena">
+                       placeholder="przykładowa cena" ng-model="newProduct.price">
             </div>
             <div class="form-group">
                 <label class="control-label " for="category">Kategoria:</label>
-                <select class="form-control" id="category" name="product_category">
-                    <option ng-repeat="c in categories" value="c.title">{{c.name | uppercase}}</option>
+                <select class="form-control" id="category" name="product_category" ng-model="newProduct.category">
+                    <option ng-repeat="c in categories" ng-value="c.title">{{c.name}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="img_link" class="control-label">Link do obrazka: </label>
-                <input type="number" class="form-control" id="img_link" name="product_img"
-                       placeholder="http://adres.pl/obrazek.jpg">
+                <input type="url" class="form-control" id="img_link" name="product_img"
+                       placeholder="http://adres.pl/obrazek.jpg" ng-model="newProduct.img">
             </div>
             <div class="form-group">
                 <button class="btn btn-primary " name="submit" type="submit">Dodaj produkt</button>

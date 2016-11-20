@@ -15,7 +15,11 @@ angular.module('myApp')
             for (var i = 0; i < $scope.products.length; i++) {
                 total += $scope.products[i].price;
             }
-            console.log("total" + total + " pr.size" + $scope.products.length);
             return total;
         };
+
+        $scope.cancelOrder = function () {
+            BasketService.clearBasket();
+            $location.path('/');
+        }
     }]);
