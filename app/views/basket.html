@@ -17,6 +17,7 @@
                 <div class="row list-group-item" ng-repeat="p in products" >
                     <p class="col-md-4">{{p.name }}, <strong>{{p.price | currency}}</strong></p>
                     <img ng-src="{{p.img}}" class="col-md-2 img-responsive pull-right" alt="{{p.name}}">
+                    <button class="btn btn-danger" ng-click="removeFromBasket($index)">Usuń z koszyka</button>
                 </div>
                 <div class="row list-group-item-success">
                     <h4 class="h4 text-success pull-right">suma koszyka: <strong>{{sumBasket() | currency}}</strong></h4>

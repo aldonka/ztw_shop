@@ -26,5 +26,8 @@ angular.module('myApp')
         $scope.continueShopping = function () {
             $location.path('/');
         };
+        $scope.removeFromBasket = function (index) {
+            $scope.products = BasketService.removeFromBasket(index);
+        }
 
     }]);

@@ -36,6 +36,28 @@ angular.module('myApp')
                 var basket = $cookies.get('basket');
                 return basket === undefined || basket == null ? 0 :$cookies.get('basket').split(',').length;
             },
+            removeFromBasket: function (index) {
+                var inBasket = $cookies.get('basket').split(',');
+                console.log("Index to remove: " + index + " old basket: " + inBasket);
+                if(inBasket != null || inBasket !== undefined){
+                    var newBasketString = '';
+                    $cookies.remove('basket');
+                    for(var i = 0; i < inBasket.length; i++){
+                        if(i == index){
+                            continue;
+                        }
+                        if(newBasketString.length == 0){
+                            newBasketString = inBasket[i];
+                        }else{
+                            newBasketString +=("," + inBasket[i]);
+                        }
+                    }
+                    console.log("New basket: " + newBasketString);
+                    $cookies.put('basket', newBasketString);
+                }
+                return this.getBasket();
+
+            },
             getBasket : function () {
                 var allProducts = [];
                 var products = [];
@@ -44,8 +66,6 @@ angular.module('myApp')
                     return products;
                 }
                 Product.get({}, function (response) {
-                    // var c = $cookies.get('products');
-                    // allProducts =( c == null || c === undefined) ? response : response.concat(JSON.parse($cookies.get("products")));
                     allProducts = response;
                     for(var index=0; index < inBasket.length; index++){
                         products.push(allProducts[inBasket[index]]);
