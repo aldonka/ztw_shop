@@ -8,7 +8,7 @@ angular.module('myApp')
 
         $scope.returnToShop = function () {
             $location.path('/');
-        }
+        };
 
         $scope.sumBasket = function () {
             var total = 0;
@@ -21,5 +21,10 @@ angular.module('myApp')
         $scope.cancelOrder = function () {
             BasketService.clearBasket();
             $location.path('/');
-        }
+        };
+
+        $scope.continueShopping = function () {
+            $location.path('/');
+        };
+
     }]);

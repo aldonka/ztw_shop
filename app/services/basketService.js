@@ -5,10 +5,10 @@ angular.module('myApp')
     .service('BasketService', ['$cookies', 'Product', function ($cookies, Product) {
         var basketTypes =  [{
            title : 'Zakupy',
-            btn_class : 'btn-sm btn-warning'
+            btn_class : 'btn btn-sm btn-warning'
         },{
             title : 'Zakończ zakupy',
-            btn_class : 'btn-sm btn-danger'
+            btn_class : 'btn btn-sm btn-danger'
         } ];
 
         return {
@@ -41,9 +41,13 @@ angular.module('myApp')
                 var allProducts = [];
                 var products = [];
                 var inBasket = $cookies.get('basket').split(',');
+                if(inBasket == null || inBasket === undefined){
+                    return products;
+                }
                 Product.get({}, function (response) {
-                    var c = $cookies.get('products');
-                    allProducts =( c == null || c === undefined) ? response : response.concat(JSON.parse($cookies.get("products")));
+                    // var c = $cookies.get('products');
+                    // allProducts =( c == null || c === undefined) ? response : response.concat(JSON.parse($cookies.get("products")));
+                    allProducts = response;
                     for(var index=0; index < inBasket.length; index++){
                         products.push(allProducts[inBasket[index]]);
                     }

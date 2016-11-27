@@ -2,10 +2,8 @@
  * Created by Dominika on 2016-11-07.
  */
 angular.module('myApp')
-    .controller('mainCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'Product', 'Category', 'BasketService', function ($scope, $rootScope, $location, $cookies, Product, Category, BasketService) {
-        $scope.$watch('products', function (oldVal, newVal ) {
-            console.log("New wal" + JSON.stringify(newVal));
-        });
+    .controller('mainCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'Product', 'Category', 'BasketService', 'InfoService', function ($scope, $rootScope, $location, $cookies, Product, Category, BasketService, InfoService) {
+        $scope.info = InfoService.getInfo('serwis', true);
         $scope.title = "Sklep spożywczy";
         $scope.newProducts = (function () {
             var c = $cookies.get('products');
@@ -15,19 +13,20 @@ angular.module('myApp')
         $scope.basketSize = BasketService.basketSize();
         Category.get({}, function (response) {
             $scope.categories = [];
-            for (var i = 0; i < response.categories.length; i++) {
+            for (var i = 0; i < response.length; i++) {
                 $scope.categories.push({
-                    "name": response.categories[i],
+                    "id" : response[i].id,
+                    "name": response[i].name,
                     "checked": true
                 });
             }
-            console.log(JSON.stringify($scope.categories));
             $scope.shownCategories = $scope.categories;
         });
         $scope.basketBtn = BasketService.noShoppingType();
         Product.get({}, function (response) {
-            var c = $cookies.get('products');
-            $scope.products =( c == null || c === undefined) ? response : response.concat(JSON.parse($cookies.get("products")));
+            // var c = $cookies.get('products');
+            // $scope.products =( c == null || c === undefined) ? response : response.concat(JSON.parse($cookies.get("products")));
+            $scope.products = response;
         });
 
         $scope.isShopping = function () {
@@ -63,16 +62,15 @@ angular.module('myApp')
         };
 
         $scope.addProduct = function () {
-            if ($scope.newProducts == null || $scope.newProducts === undefined) {
-                $scope.newProducts = [];
-            }
             $scope.newProduct.category = getCategoryId($scope.newProduct.category);
-            $scope.newProducts.push($scope.newProduct);
-            $cookies.remove('products');
-            $cookies.put('products', JSON.stringify($scope.newProducts));
-            console.log(JSON.stringify($scope.newProduct));
-
-            $location.path('/');
+            Product.save($scope.newProduct).$promise.then(function (response) {
+                $scope.info = InfoService.getInfo("success, added", true);
+                console.log("New product added" + response);
+                $location.path('/');
+            }, function (err) {
+                $scope.info = InfoService.getInfo("error: " + err, true);
+                $location.path('/');
+            });
         };
 
         getCategoryId = function (catString) {

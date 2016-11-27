@@ -1,8 +1,9 @@
 'use strict';
 angular.module('myApp', [
   'ngRoute', 'ngResource', 'ngAnimate', 'ngCookies'
-]).
-config([ '$routeProvider', function( $routeProvider) {
+])
+    .value('Path', 'http://localhost:2403')
+    .config([ '$routeProvider', function( $routeProvider) {
   $routeProvider
       .when('/main', {
         templateUrl: 'views/main.html',

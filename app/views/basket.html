@@ -5,7 +5,12 @@
     <div class="jumbotron">
         <div class="row">
             <h1 class="h1 col-md-8">{{title}}</h1>
-            <button class="pull-right btn-group-sm btn-danger" ng-click="cancelOrder()">Anuluj zamówienie</button>
+            <div class="pull-right btn-group">
+                <button class="btn btn-danger" ng-click="cancelOrder()">Anuluj zamówienie</button>
+                <button class="btn btn-success" ng-click="">Złóż zamówienie</button>
+                <button class="btn btn-warning" ng-click="continueShopping()">Kontynuuj zakupy</button>
+            </div>
+
         </div>
         <div class="row">
             <div class="list-group">
