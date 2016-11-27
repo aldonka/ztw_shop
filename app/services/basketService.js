@@ -19,7 +19,6 @@ angular.module('myApp')
                 return currentType.title == basketTypes[0].title ? basketTypes[1] :  basketTypes[0];
             },
             noShoppingType: function () {
-                $cookies.remove('basket');
                 return basketTypes[0];
             },
             addToBasket : function (productIndex) {

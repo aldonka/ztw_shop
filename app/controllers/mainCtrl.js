@@ -3,19 +3,14 @@
  */
 angular.module('myApp')
     .controller('mainCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'Product', 'Category', 'BasketService', 'InfoService', function ($scope, $rootScope, $location, $cookies, Product, Category, BasketService, InfoService) {
-        $scope.info = InfoService.getInfo('serwis', true);
         $scope.title = "Sklep spożywczy";
-        $scope.newProducts = (function () {
-            var c = $cookies.get('products');
-            return c == null || c === undefined ? [] : JSON.parse($cookies.get("products"));
-        })();
         $scope.newProduct = {};
         $scope.basketSize = BasketService.basketSize();
         Category.get({}, function (response) {
             $scope.categories = [];
             for (var i = 0; i < response.length; i++) {
                 $scope.categories.push({
-                    "id" : response[i].id,
+                    "id": response[i].id,
                     "name": response[i].name,
                     "checked": true
                 });
@@ -24,8 +19,6 @@ angular.module('myApp')
         });
         $scope.basketBtn = BasketService.noShoppingType();
         Product.get({}, function (response) {
-            // var c = $cookies.get('products');
-            // $scope.products =( c == null || c === undefined) ? response : response.concat(JSON.parse($cookies.get("products")));
             $scope.products = response;
         });
 
@@ -49,8 +42,15 @@ angular.module('myApp')
         $scope.basketAction = function () {
             $scope.changeBasketBtn();
             if (BasketService.ifIsShopping($scope.basketBtn)) {
-                $location.path('/basket');
+                if (BasketService.basketSize() > 0)
+                    $location.path('/basket');
+                else{
+                    $scope.info = InfoService.getError("Koszyk jest pusty.");
+                    InfoService.showInfo($scope.info);
+                }
             }
+
+
         };
 
         $scope.addProductAction = function () {
@@ -74,8 +74,8 @@ angular.module('myApp')
         };
 
         getCategoryId = function (catString) {
-            for(var i = 0; i < $scope.categories.length; i++){
-                if($scope.categories[i].name == catString){
+            for (var i = 0; i < $scope.categories.length; i++) {
+                if ($scope.categories[i].name == catString) {
                     return i;
                 }
             }

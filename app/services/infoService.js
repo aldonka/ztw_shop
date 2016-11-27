@@ -2,17 +2,32 @@
  * Created by Dominika on 2016-11-27.
  */
 angular.module('myApp')
-    .service('InfoService', [function () {
+    .service('InfoService', ['$timeout', function ($timeout) {
         var info = {
             msg : "test",
             show : false,
             cssClass : "alert-info"
         };
         return {
-            getInfo : function (msg, show) {
+            getInfo : function (msg) {
                 info.msg = msg;
-                info.show = show;
+                info.show = true;
                 return info;
+            },
+            getWarning : function (msg) {
+                var info = this.getInfo(msg);
+                info.cssClass = "alert-warning";
+                return info;
+            },
+            getError : function (msg) {
+                var info = this.getInfo(msg);
+                info.cssClass = "alert-danger";
+                return info;
+            },
+            showInfo : function (info) {
+                $timeout(function () {
+                    info.show = false;
+                }, 3000);
             }
         }
     }]);
