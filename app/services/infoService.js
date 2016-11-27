@@ -24,7 +24,13 @@ angular.module('myApp')
                 info.cssClass = "alert-danger";
                 return info;
             },
+            getSuccess : function (msg) {
+                var info = this.getInfo(msg);
+                info.cssClass = "alert-success";
+                return info;
+            },
             showInfo : function (info) {
+                console.log("Tuuu info, info: " + JSON.stringify(info));
                 $timeout(function () {
                     info.show = false;
                 }, 3000);

@@ -4,11 +4,20 @@
     </div>
 
     <div class="row">
-        <div class="panel panel-body col-md-2">
-            <h3 class="h3 text-info">Kategorie:</h3>
-            <p ng-repeat="c in categories">
-                <input type="checkbox" ng-checked="c.checked" ng-click="changeCheckbox($index)"> {{c.name }}
-            </p>
+        <div class="col-md-2">
+            <div class = "panel panel-body" >
+                <h3 class="h3 text-info">Kategorie:</h3>
+                <p ng-repeat="c in categories">
+                    <input type="checkbox" ng-checked="c.checked" ng-click="changeCheckbox($index)"> {{c.name }}
+                </p>
+            </div>
+            <div class="panel panel-body ">
+                <div class="input-group">
+                    <label class="h5 text-info" for="searchByName">Szukaj po nazwie: </label>
+                    <input type="text" ng-model="search" placeholder="Nazwa produktu" class="form-control" id="searchByName">
+                </div>
+            </div>
+
         </div>
         <div class="col-md-10 jumbotron">
             <div ng-show="info !== undefined && info.show" class="sample-show-hide">
@@ -24,7 +33,7 @@
             </div>
             <div class="row">
                 <h3 class="h3 text-info">Produkty:</h3>
-                <div class="col-sm-4" ng-animate="'animate'" ng-repeat="p in products" ng-show="categories[p.category].checked">
+                <div class="col-sm-4" ng-animate="'animate'" ng-repeat="p in products | filter:search" ng-show="categories[p.category].checked">
                     {{p.name }}, <strong>{{p.price | currency}}</strong>, {{categories[p.category].name}}
                     <button class="btn btn-sm  btn-success sample-show-hide"  ng-hide="isShopping()" ng-click="addToBasket($index)"><span class="glyphicon glyphicon-euro"></span> Dodaj</button>
                     <img ng-src="{{p.img}}" class="img-responsive" width="250"  alt="{{p.name}}">

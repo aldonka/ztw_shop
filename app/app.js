@@ -17,6 +17,10 @@ angular.module('myApp', [
           templateUrl: 'views/basket.html',
           controller: 'basketCtrl'
       })
+      .when('/order', {
+          templateUrl: 'views/order.html',
+          controller: 'basketCtrl'
+      })
       .otherwise({
         redirectTo: '/main'
       });

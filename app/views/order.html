@@ -1,0 +1,37 @@
+<div class="container" xmlns="http://www.w3.org/1999/html">
+    <div class="h2 text-info row" ng-click="returnToShop()">
+        powrót do sklepu
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <h1 class="h2 col-md-8">{{orderTitle}}</h1>
+            <div class="pull-right btn-group">
+                <button class="btn btn-danger" ng-click="cancelOrder()">Anuluj zamówienie</button>
+            </div>
+        </div>
+        <div ng-show="info !== undefined && info.show" class="sample-show-hide">
+            <div class="alert {{info.cssClass}}">{{info.msg}}</div>
+        </div>
+        <div class="row">
+            <strong class="text-info" ng-hide="isShopping()">Koszyk: {{basketSize}}</strong>
+            <form name="orderForm" novalidate class="center-block">
+
+                <!--Delivery owner input group-->
+                <div class="form-inline" ng-class="{ 'has-error': orderForm.ownerName.$invalid }">
+                    <label class="control-label col-lg-3">Imie i nazwisko użytkownika:</label>
+                    <input type="text" class="form-control" name="ownerName" ng-model="order.name" required placeholder="imie">
+                </div>
+                <p ng-show="orderForm.ownerName.$invalid && !orderForm.ownerName.$pristine" class="help-block">You name is required.</p>
+
+                <!--Address input group-->
+                <div class="form-inline" ng-class="{ 'has-error': orderForm.address.$invalid }">
+                    <label class="control-label col-lg-3">Adres:</label>
+                    <input type="text" class="form-control" name="address" ng-model="order.address" required placeholder="adres wysyłki">
+                </div>
+                <button class="btn btn-primary" ng-click="createOrder()">Zakończ zamówienie</button>
+                <button class="btn btn-link" ng-click="resetOrder()">Resetuj pola</button>
+            </form>
+
+        </div>
+    </div>
+</div>
