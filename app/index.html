@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body ng-app="myApp">
+<ng-include ng-if="isAdmin" src="'views/admin/nav_bar.html'"></ng-include>
 <div ng-view>
 </div>
 <!-- various Angular.js dependencies -->
@@ -32,5 +33,6 @@
 <script src="services/basketService.js"></script>
 <script src="services/orderService.js"></script>
 <script src="services/infoService.js"></script>
+<script src="services/sessionService.js"></script>
 </body>
 </html>
