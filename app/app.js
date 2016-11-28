@@ -37,4 +37,7 @@ angular.module('myApp', [
             console.log("Log in as adin");
             SessionService.logInAdmin();
         };
+        $rootScope.logout = function () {
+            SessionService.logout();
+        }
     }]);

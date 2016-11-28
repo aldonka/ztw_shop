@@ -40,6 +40,9 @@ angular.module('myApp')
                 }, function (error) {
                     console.log("You are not admin...");
                 })
+            },
+            logout : function () {
+                $rootScope.adminLogged = false;
             }
         }
     }]);
