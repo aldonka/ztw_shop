@@ -7,6 +7,7 @@ var config = require('./config');
 
 console.info('server process starting');
 
+
 app.listen(config.express.port, config.express.ip, function (error) {
     if (error) {
         log.error('Unable to listen for connections', error);
