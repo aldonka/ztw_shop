@@ -7,7 +7,10 @@ var mongoose = require('mongoose');
 
 var app = express();
 
+//db model files
 require('./categories/model');
+require('./products/model');
+
 app.use('/api', require('./categories/router'));
 app.use('/api', require('./products/router'));
 app.use('/api', require('./orders/router'));

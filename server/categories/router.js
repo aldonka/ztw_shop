@@ -23,8 +23,6 @@ function createCategory(req, res) {
         res.json(category);
         // res.status(201).send()
     });
-
-
 }
 
 router.post('/categories', createCategory);
