@@ -10,11 +10,11 @@ var app = express();
 //db model files
 require('./categories/model');
 require('./products/model');
+require('./orders/model');
 
 app.use('/api', require('./categories/router'));
 app.use('/api', require('./products/router'));
 app.use('/api', require('./orders/router'));
-// Repeat the above line for additional model areas ("deals", "vehicles", etc)
 
 // FINALLY, use any error handlers
 // app.use(require('app/errors/not-found'))
