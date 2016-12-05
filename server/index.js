@@ -4,8 +4,14 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
-
+var bodyParser = require('body-parser');
 var app = express();
+
+var cors = require('cors');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+// use it before all route definitions
+app.use(cors({origin: 'http://localhost:63342'}));
 
 //db model files
 require('./categories/model');

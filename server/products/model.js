@@ -23,5 +23,9 @@ function create(newProduct, callback){
     product.save(callback);
 }
 
+function findById(id, callback){
+    Product.findById(id, callback);
+}
 exports.findAll = findAll;
 exports.create = create;
+exports.findById = findById;

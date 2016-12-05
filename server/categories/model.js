@@ -4,7 +4,6 @@
 var mongoose = require('mongoose');
 
 var CategorySchema = new mongoose.Schema({
-    id : Number,
     name : String
 });
 
@@ -20,5 +19,10 @@ function create(newCategory, callback){
     category.save(callback);
 }
 
+function findById(id, callback) {
+    Category.findOne({id : id}, callback);
+}
+
 exports.findAll = findAll;
 exports.create = create;
+exports.findById = findById;

@@ -5,7 +5,8 @@ var mongoose = require('mongoose');
 
 var OrderSchema = new mongoose.Schema({
     order_date : Date,
-    for : String,
+    name : String,
+    address : String,
     products : Array
 });
 
