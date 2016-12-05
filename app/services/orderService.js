@@ -10,10 +10,11 @@ angular.module('myApp')
                     InfoService.showInfo($rootScope.info);
                     $location.path('/');
                 }else {
-                    order.productsIds = [];
+                    order.products = [];
                     order.orderDate = Date.now();
                     for(var i = 0 ; i < products.length; i++){
-                        order.productsIds.push(products[i].id);
+                        console.log("Add product: " + products[i]._id);
+                        order.products.push(products[i]._id);
                     }
                     Order.save(order,function (response) {
                         BasketService.clearBasket();
