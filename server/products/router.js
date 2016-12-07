@@ -24,10 +24,43 @@ function createProduct (req, res) {
 }
 
 function findById(req, res){
-    product.findById(req.param("id"))
+    product.findById(req.param("id"), function (error, products) {
+        if (error) {
+            log.error(error, 'error finding categories');
+            res.status(500).send(error);
+            return
+        }
+        res.status(200).json(products)
+    })
+
+}
+
+function updateProduct(req, res){
+    product.update(req.body, function (error, product) {
+        if(error){
+            console.log(error, 'error updating product id: ' + req.body._id);
+            res.status(500).send(error);
+            return
+        }
+        res.status(200).json(product)
+    })
+}
+
+function removeProduct(req, res) {
+    product.remove(req.params.id, function (error, product) {
+        if(error){
+            console.log(error, 'error removing product id: ' + req.body._id);
+            res.status(500).send(error);
+            return
+        }
+        res.status(200).body("Product removed id: " + req.params.id);
+    })
 }
 
 router.post('/products', createProduct);
 router.get('/products', getProducts);
+router.get('/products/:id', findById);
+router.put('/products/:id', updateProduct);
+router.delete('/products/:id', removeProduct);
 
 module.exports = router;
