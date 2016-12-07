@@ -3,46 +3,30 @@
  */
 var product = require('./model');
 var router = require('express').Router();
+var basic = require('../basic');
 
 function getProducts (req, res) {
     product.findAll(function (error, products) {
-        if (error) {
-            log.error(error, 'error finding categories');
-            res.status(500).send(error);
-            return
-        }
-        res.status(200).json(products)
+        basic.handleResponse(error, products, req, res, 'error finding products');
     });
 }
 
 function createProduct (req, res) {
     product.create(req.body, function (err, product) {
-        if(err){return next(err)}
-
-        res.json(product);
+        basic.handleResponse(error, products, req, res, 'error while creating product');
     });
 }
 
 function findById(req, res){
-    product.findById(req.param("id"), function (error, products) {
-        if (error) {
-            log.error(error, 'error finding categories');
-            res.status(500).send(error);
-            return
-        }
-        res.status(200).json(products)
+    product.findById(req.params.id, function (error, products) {
+        basic.handleResponse(error, products, req, res, 'error finding product id:' + req.params.id);
     })
 
 }
 
 function updateProduct(req, res){
     product.update(req.body, function (error, product) {
-        if(error){
-            console.log(error, 'error updating product id: ' + req.body._id);
-            res.status(500).send(error);
-            return
-        }
-        res.status(200).json(product)
+        basic.handleResponse(error, products, req, res, 'error while updating product id: ' + req.params.id);
     })
 }
 
