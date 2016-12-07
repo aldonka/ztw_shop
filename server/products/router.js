@@ -13,20 +13,20 @@ function getProducts (req, res) {
 
 function createProduct (req, res) {
     product.create(req.body, function (error, product) {
-        basic.handleResponse(error, products, req, res, 'error while creating product');
+        basic.handleResponse(error, product, req, res, 'error while creating product');
     });
 }
 
 function findById(req, res){
-    product.findById(req.params.id, function (error, products) {
-        basic.handleResponse(error, products, req, res, 'error finding product id:' + req.params.id);
+    product.findById(req.params.id, function (error, product) {
+        basic.handleResponse(error, product, req, res, 'error finding product id:' + req.params.id);
     })
 
 }
 
 function updateProduct(req, res){
     product.update(req.body, function (error, product) {
-        basic.handleResponse(error, products, req, res, 'error while updating product id: ' + req.params.id);
+        basic.handleResponse(error, product, req, res, 'error while updating product id: ' + req.params.id);
     })
 }
 
