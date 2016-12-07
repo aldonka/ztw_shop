@@ -12,7 +12,7 @@ function getProducts (req, res) {
 }
 
 function createProduct (req, res) {
-    product.create(req.body, function (err, product) {
+    product.create(req.body, function (error, product) {
         basic.handleResponse(error, products, req, res, 'error while creating product');
     });
 }
