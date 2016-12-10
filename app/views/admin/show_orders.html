@@ -7,7 +7,7 @@
         <div class="container">
             <form class="form-inline">
                 <div class="panel panel-body panel-info" ng-repeat="order in orders">
-                    <div class="col-lg-10">
+                    <div class="col-lg-12">
                         <div class="row">
                             <div class="form-group form-group-sm">
                                 <label for="name" class="control-label">Odbiorca:</label>
@@ -19,22 +19,28 @@
                                 <input type="text" class="form-control" id="address" name="order_address"
                                        ng-model="order.address" disabled>
                             </div>
+                            <div class="form-group form-group-sm">
+                                <label for="order_value" class="control-label">Wartość:</label>
+                                <input type="text" class="form-control" id="order_value" name="order_value"
+                                       ng-model="order.orderValue" disabled>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <div class="btn btn-group">
+                                    <button class="btn btn-warning btn-sm " ng-click="order.showDetails = !order.showDetails"><span
+                                            class="glyphicon glyphicon-apple"/>Szczegóły</button>
+                                    <button class="btn btn-primary btn-sm"><span
+                                            class="glyphicon glyphicon-pencil"/> Modyfikuj
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="row">
+                        <div ng-show="order.showDetails" class="row sample-show-hide">
                             <div class="form-group form-group-sm">
                                 <label class="control-label">Produkty:</label>
                                 <input ng-repeat="p in order.orderedProducts track by $index" type="text"
                                        class="form-control" name="order_address" value="{{p.name}}, {{p.price|currency}}"
                                        disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group form-group-sm">
-                            <div class="btn btn-group">
-                                <button class="btn btn-primary btn-sm " name="submit" type="submit"><span
-                                        class="glyphicon glyphicon-pencil"/> Modyfikuj
-                                </button>
                             </div>
                         </div>
                     </div>

@@ -12,6 +12,8 @@ angular.module('myApp')
                     for(var j = 0; j < $scope.orders[i].products.length; j++){
                         $scope.orders[i].orderedProducts.push(findProduct($scope.products, $scope.orders[i].products[j]))
                     }
+                    $scope.orders[i].orderValue = orderValue($scope.orders[i].orderedProducts);
+                    $scope.orders[i].showDetails = false;
                 }
             });
         });
@@ -24,4 +26,22 @@ angular.module('myApp')
             return null;
         }
 
+        function orderValue(products){
+            var value = 0;
+            for(var i =0; i < products.length; i++){
+                if(products[i] != null && products[i] !== undefined){
+                    value += products[i].price;
+                }
+            }
+            return value;
+        }
+
+        function findOrder(id) {
+            for(var i =0; i < $scope.orders.length; i++){
+                if($scope.orders[i]._id == id){
+                    return $scope.orders[i];
+                }
+            }
+            return null;
+        }
     }]);

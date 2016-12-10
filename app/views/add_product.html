@@ -6,21 +6,27 @@
         <h1 class="text-info">
             Dodaj nowy produkt
         </h1>
-        <form class=" col-lg-push-3 col-md-6">
+        <div ng-show="info !== undefined && info.show" class="sample-show-hide">
+            <div class="alert {{info.cssClass}}">{{info.msg}}</div>
+        </div>
+        <form name="productForm" class="col-lg-push-3 col-md-6" novalidate>
             <div class="form-group">
                 <label for="name" class="control-label">Nazwa produktu: </label>
-                <input type="text" class="form-control" id="name" name="product_name" placeholder="przykładowa nazwa" ng-model="newProduct.name">
+                <input type="text" class="form-control" id="name" name="product_name" placeholder="przykładowa nazwa" ng-model="newProduct.name" required>
+                <p ng-show="productForm.product_name.$invalid && !productForm.product_name.$pristine" class="help-block">Nazwa produktu jest wymagana.</p>
             </div>
             <div class="form-group">
                 <label for="price" class="control-label">Cena produktu: </label>
                 <input type="number" class="form-control" id="price" name="product_price"
-                       placeholder="przykładowa cena" ng-model="newProduct.price">
+                       placeholder="przykładowa cena" ng-model="newProduct.price" required>
+                <p ng-show="productForm.product_price.$invalid && !productForm.product_price.$pristine" class="help-block">Cena jest wymagana.</p>
             </div>
             <div class="form-group">
                 <label class="control-label " for="category">Kategoria:</label>
                 <select class="form-control" id="category" name="product_category" ng-model="newProduct.category">
                     <option ng-repeat="c in categories" ng-value="c.title">{{c.name}}</option>
                 </select>
+                <p ng-show="productForm.product_category.$invalid && !productForm.product_category.$pristine" class="help-block">Wybierz kategorie produktu.</p>
             </div>
             <div class="form-group">
                 <label for="img_link" class="control-label">Link do obrazka: </label>

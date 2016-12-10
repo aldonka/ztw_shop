@@ -62,15 +62,20 @@ angular.module('myApp')
         };
 
         $scope.addProduct = function () {
-            $scope.newProduct.category = getCategoryId($scope.newProduct.category);
-            Product.save($scope.newProduct).$promise.then(function (response) {
-                $scope.info = InfoService.getInfo("success, added", true);
-                console.log("New product added" + response);
-                $location.path('/');
-            }, function (err) {
-                $scope.info = InfoService.getInfo("error: " + err, true);
-                $location.path('/');
-            });
+            if($scope.productForm.$valid){
+                $scope.newProduct.category = getCategoryId($scope.newProduct.category);
+                Product.save($scope.newProduct).$promise.then(function (response) {
+                    $scope.info = InfoService.getInfo("success, added", true);
+                    console.log("New product added" + response);
+                    $location.path('/');
+                }, function (err) {
+                    $scope.info = InfoService.getInfo("error: " + err, true);
+                    $location.path('/');
+                });
+            }else{
+                $scope.info = InfoService.getError("Bład w danych z formularza.");
+                InfoService.showInfo($scope.info);
+            }
         };
 
         getCategoryId = function (catString) {
