@@ -3,28 +3,28 @@
  */
 var order = require('./model');
 var router = require('express').Router();
+var basic = require('../basic');
 
 function getOrders (req, res) {
     order.findAll(function (error, orders) {
-        if (error) {
-            log.error(error, 'error finding orders');
-            res.status(500).send(error);
-            return
-        }
-        res.json(orders)
+        basic.handleResponse(error, orders, req, res, 'error finding orders');
     });
 }
 
 function createOrder (req, res) {
-    // res.status(201).send()
-    order.create(req.body, function (err, order) {
-        if(err){return next(err)}
+    order.create(req.body, function (error, order) {
+        basic.handleResponse(error, order, req, res, 'error while creating order');
+    });
+}
 
-        res.json(order);
+function removeOrder(req, res) {
+    order.remove(req.params.id, function (error, order) {
+        basic.handleResponse(error, order, req, res, 'error removing order id: ' + req.params.id);
     });
 }
 
 router.post('/orders', createOrder);
 router.get('/orders', getOrders);
+router.delete('/orders/:id', removeOrder);
 
 module.exports = router;

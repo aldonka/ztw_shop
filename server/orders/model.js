@@ -26,6 +26,11 @@ function findById(id, callback) {
     Order.findById(id, callback);
 }
 
+function remove(id, callback) {
+    Order.findByIdAndRemove(id, callback);
+}
+
 exports.findAll = findAll;
 exports.create = create;
 exports.findById = findById;
+exports.remove = remove;

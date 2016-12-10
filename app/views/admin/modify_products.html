@@ -3,6 +3,9 @@
         Anuluj zmiany
     </div>
     <div class="row jumbotron">
+        <div ng-show="info !== undefined && info.show" class="sample-show-hide">
+            <div class="alert {{info.cssClass}}">{{info.msg}}</div>
+        </div>
         <h2 class="text-info">
             Produkty
             <div class="btn btn-group">
@@ -38,7 +41,7 @@
                         <div class="form-group form-group-sm">
                             <div class="btn btn-group">
                                 <button class="btn btn-primary btn-sm " name="submit" type="submit"><span class="glyphicon glyphicon-pencil"/> Modyfikuj</button>
-                                <button ng-show="removeProducts" class="btn btn-danger btn-sm sample-show-hide" name="submit" type="submit"><span class="glyphicon glyphicon-trash"/> Usuń</button>
+                                <button ng-show="removeProducts" ng-click="removeProduct(product._id)" class="btn btn-danger btn-sm sample-show-hide" name="submit" type="submit"><span class="glyphicon glyphicon-trash" /> Usuń</button>
                             </div>
 
                         </div>

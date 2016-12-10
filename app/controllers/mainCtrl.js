@@ -78,6 +78,19 @@ angular.module('myApp')
             }
         };
 
+        $scope.removeProduct = function removeProduct(id){
+            Product.delete({id: id}, function () {
+                $scope.info = InfoService.getSuccess("Usunięto produkt : " + id);
+                InfoService.showInfo($scope.info);
+                Product.get({}, function (response) {
+                    $scope.products = response;
+                });
+            }, function () {
+                $scope.info = InfoService.getError("Nie udało się usunąć produktu : " + id);
+                InfoService.showInfo($scope.info);
+            })
+        };
+
         getCategoryId = function (catString) {
             for (var i = 0; i < $scope.categories.length; i++) {
                 if ($scope.categories[i].name == catString) {

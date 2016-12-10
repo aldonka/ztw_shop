@@ -27,18 +27,13 @@ function findById(req, res){
 function updateProduct(req, res){
     product.update(req.body, function (error, product) {
         basic.handleResponse(error, product, req, res, 'error while updating product id: ' + req.params.id);
-    })
+    });
 }
 
 function removeProduct(req, res) {
     product.remove(req.params.id, function (error, product) {
-        if(error){
-            console.log(error, 'error removing product id: ' + req.body._id);
-            res.status(500).send(error);
-            return
-        }
-        res.status(200).body("Product removed id: " + req.params.id);
-    })
+        basic.handleResponse(error, product, req, res, 'error removing product id: ' + req.params.id);
+    });
 }
 
 router.post('/products', createProduct);
