@@ -1,0 +1,51 @@
+<div class="container" xmlns="http://www.w3.org/1999/html">
+    <div class="h2 text-info row">
+        Anuluj zmiany
+    </div>
+    <div class="row jumbotron">
+        <h2 class="text-info">
+            Produkty
+            <div class="btn btn-group">
+                <div class="btn btn-info" ng-click="addProductAction()"><span class="glyphicon glyphicon-bell"/> Dodaj nowy</div>
+                <button class="btn btn-danger " ng-model="removeProducts" ng-init="false" ng-click="removeProducts = !removeProducts" name="submit" type="submit"><span class="glyphicon glyphicon-trash"/> Usuń produkty</button>
+                </div>
+
+        </h2>
+
+        <div class="container">
+            <form class="form-inline" ng-submit="modifyProducts()">
+                <div  class="row" ng-repeat="product in products">
+                    <div>
+                        <div class="form-group form-group-sm">
+                            <label for="name" class="control-label">Nazwa:</label>
+                            <input type="text" class="form-control" id="name" name="product_name" placeholder="przykładowa nazwa" ng-model="product.name">
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="price" class="control-label">Cena:</label>
+                            <input type="number" class="form-control" id="price" name="product_price"
+                                   placeholder="przykładowa cena" ng-model="product.price">
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <select class="form-control" id="category" name="product_category" ng-model="product.category">
+                                <option ng-repeat="c in categories" ng-value="c.title">{{c.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="img_link" class="control-label"></label>
+                            <input type="url" class="form-control" id="img_link" name="product_img"
+                                   placeholder="http://adres.pl/obrazek.jpg" ng-model="product.img">
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <div class="btn btn-group">
+                                <button class="btn btn-primary btn-sm " name="submit" type="submit"><span class="glyphicon glyphicon-pencil"/> Modyfikuj</button>
+                                <button ng-show="removeProducts" class="btn btn-danger btn-sm sample-show-hide" name="submit" type="submit"><span class="glyphicon glyphicon-trash"/> Usuń</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

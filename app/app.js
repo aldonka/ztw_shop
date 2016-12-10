@@ -18,6 +18,10 @@ angular.module('myApp', [
                 templateUrl: 'views/add_product.html',
                 controller: 'mainCtrl'
             })
+            .when('/modify_products', {
+                templateUrl: 'views/admin/modify_products.html',
+                controller: 'mainCtrl'
+            })
             .when('/basket', {
                 templateUrl: 'views/basket.html',
                 controller: 'basketCtrl'
@@ -25,6 +29,10 @@ angular.module('myApp', [
             .when('/order', {
                 templateUrl: 'views/order.html',
                 controller: 'basketCtrl'
+            })
+            .when('/orders', {
+                templateUrl: 'views/admin/show_orders.html',
+                controller: 'ordersCtrl'
             })
             .otherwise({
                 redirectTo: '/main'

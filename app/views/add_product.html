@@ -6,7 +6,7 @@
         <h1 class="text-info">
             Dodaj nowy produkt
         </h1>
-        <form ng-submit="addProduct()" class=" col-lg-push-3 col-md-6">
+        <form class=" col-lg-push-3 col-md-6">
             <div class="form-group">
                 <label for="name" class="control-label">Nazwa produktu: </label>
                 <input type="text" class="form-control" id="name" name="product_name" placeholder="przykładowa nazwa" ng-model="newProduct.name">
@@ -28,8 +28,8 @@
                        placeholder="http://adres.pl/obrazek.jpg" ng-model="newProduct.img">
             </div>
             <div class="form-group">
-                <button class="btn btn-primary " name="submit" type="submit">Dodaj produkt</button>
-                <button class="btn btn-warning " name="cancel">Anuluj</button>
+                <button class="btn btn-primary " name="submit" type="button" ng-click="addProduct()">Dodaj produkt</button>
+                <button class="btn btn-warning " name="cancel" type="button" ng-click="returnToShop()">Anuluj</button>
             </div>
         </form>
     </div>
