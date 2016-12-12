@@ -4,6 +4,10 @@
 var product = require('./model');
 var router = require('express').Router();
 var basic = require('../basic');
+var express = require('express');
+var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 function getProducts (req, res) {
     product.findAll(function (error, products) {
@@ -14,6 +18,9 @@ function getProducts (req, res) {
 function createProduct (req, res) {
     product.create(req.body, function (error, product) {
         basic.handleResponse(error, product, req, res, 'error while creating product');
+        // io.on('connection', function (socket) {
+        //     socket.broadcast.emit('product:added', product);
+        // });
     });
 }
 

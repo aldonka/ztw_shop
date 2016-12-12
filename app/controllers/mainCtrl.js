@@ -2,7 +2,24 @@
  * Created by Dominika on 2016-11-07.
  */
 angular.module('myApp')
-    .controller('mainCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'Product', 'Category', 'BasketService', 'InfoService', function ($scope, $rootScope, $location, $cookies, Product, Category, BasketService, InfoService) {
+    .controller('mainCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'Product', 'Category', 'BasketService', 'InfoService', 'Socket', function ($scope, $rootScope, $location, $cookies, Product, Category, BasketService, InfoService, Socket) {
+
+        Socket.on('message', function(data){console.log("Socket.io msg: " + data)});
+
+        Socket.on('product:added', function(data){
+            $scope.info = InfoService.getInfo("Dodano nowy produkt: " + data.name);
+            InfoService.showInfo($scope.info);
+            console.log("Socket.io new product added: " + JSON.stringify(data));
+            $scope.products.push(data);
+        });
+
+        Socket.on('product:removed', function (data) {
+            $scope.info = InfoService.getWarning("Usunięto produkt: " + data);
+            InfoService.showInfo($scope.info);
+            console.log("Socket.io remove product: " + data);
+            $scope.products.splice(findInArrById($scope.products, data),1);
+        });
+
         $scope.title = "Sklep spożywczy";
         $scope.newProduct = {};
         $scope.basketSize = BasketService.basketSize();
@@ -66,7 +83,7 @@ angular.module('myApp')
                 $scope.newProduct.category = getCategoryId($scope.newProduct.category);
                 Product.save($scope.newProduct).$promise.then(function (response) {
                     $scope.info = InfoService.getInfo("success, added", true);
-                    console.log("New product added" + response);
+                    Socket.emit('product:add', response);
                     $location.path('/');
                 }, function (err) {
                     $scope.info = InfoService.getInfo("error: " + err, true);
@@ -82,6 +99,7 @@ angular.module('myApp')
             Product.delete({id: id}, function () {
                 $scope.info = InfoService.getSuccess("Usunięto produkt : " + id);
                 InfoService.showInfo($scope.info);
+                Socket.emit('product:remove', id);
                 Product.get({}, function (response) {
                     $scope.products = response;
                 });
@@ -97,5 +115,14 @@ angular.module('myApp')
                     return i;
                 }
             }
+        };
+
+        function findInArrById(arr, id) {
+            for(var i = 0; i < arr.length; i++){
+                if(arr[i]._id == id){
+                    return i;
+                }
+            }
+            return null;
         }
     }]);

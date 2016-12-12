@@ -3,6 +3,7 @@ angular.module('myApp', [
     'ngRoute', 'ngResource', 'ngAnimate', 'ngCookies'
 ])
     .value('Path', 'http://localhost:3000/api')
+    .value('SocketPath', 'http://localhost:3880')
     // .value('Path', 'http://localhost:2403')
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
